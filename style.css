@@ -11,31 +11,39 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  row-gap: 2rem;
   font-family: "Roboto", serif;
+  font-weight: 400;
   font-style: normal;
   padding: 0 1rem;
 }
 
-/* Fonts */
-.roboto-light {
-  font-weight: 300;
+/* Display arrangement */
+
+nav,
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.roboto-regular {
-  font-weight: 400;
+/* Fonts */
+
+.roboto-light {
+  font-weight: 300;
 }
 
 .roboto-medium {
   font-weight: 500;
 }
 
+/* Navigation */
+
 nav {
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 ul {
@@ -47,6 +55,23 @@ ul li {
   margin: 0 0.3rem;
   padding: 0.6rem;
   cursor: pointer;
+}
+
+/* Main */
+
+main {
+  width: 100%;
+}
+
+.primary-btn {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
 }
 
 @media only screen and (min-width: 600px) {
