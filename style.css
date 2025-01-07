@@ -22,7 +22,9 @@ body {
 /* Display arrangement */
 
 nav,
-header {
+header,
+.todo-card-heading,
+.todo-btn-conatiner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,6 +99,10 @@ main {
   width: 100%;
 }
 
+.todo-category-container > header {
+  margin-bottom: 1rem;
+}
+
 .category-counter-container {
   background-color: aliceblue;
   border-radius: 4px;
@@ -104,6 +110,28 @@ main {
 
 .category-counter {
   padding: 0.5rem 0.8rem;
+}
+
+/* Todos -> Todo cards */
+
+.todo-card {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.todo-card-heading {
+  margin-bottom: 1rem;
+}
+
+.todo-btn-conatiner {
+  column-gap: 0.3rem;
+}
+
+.todo-description {
+  font-size: 0.9rem;
 }
 
 /* Modal */
@@ -219,7 +247,12 @@ form {
 
 @media only screen and (min-width: 768px) {
   body {
-    padding: 0 4rem;
+    padding: 0 2rem;
+  }
+
+  .todos-container {
+    flex-direction: row;
+    column-gap: 2rem;
   }
 
   .todos-overlay {
@@ -229,7 +262,7 @@ form {
   }
 
   .modal-overlay {
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
   }
 
   .radio-group {
@@ -246,17 +279,17 @@ form {
 
 @media only screen and (min-width: 992px) {
   body {
-    padding: 0 6rem;
+    padding: 0 4rem;
   }
 
   .modal-overlay {
-    padding: 1rem 6rem;
+    padding: 1rem 4rem;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   body {
-    padding: 0 10%;
+    padding: 0 5%;
   }
 
   .modal-overlay {

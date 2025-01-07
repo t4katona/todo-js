@@ -15,12 +15,12 @@
             href="https://www.linkedin.com/in/katonatamas-zalan"
             target="_blank"
           >
-            <img src="assets/linkedin.svg" alt="Image to linkedin link" />
+            <img src="assets/linkedin.svg" alt="Icon to linkedin link" />
           </a>
         </li>
         <li>
           <a href="https://github.com/t4katona" target="_blank">
-            <img src="assets/github.svg" alt="Image to github link" />
+            <img src="assets/github.svg" alt="Icon to github link" />
           </a>
         </li>
       </ul>
@@ -31,16 +31,37 @@
         <button class="btn primary-btn" id="open-modal-btn">Create task</button>
       </header>
       <div class="todos-container">
-        <section class="todo-category-container">
+        <section class="todo-category-container" id="todo-category-todo">
           <header>
             <h3 class="roboto-medium">To-Do</h3>
             <div class="category-counter-container">
               <p class="category-counter roboto-medium">3</p>
             </div>
           </header>
+          <div class="todo-card">
+            <div class="todo-card-heading">
+              <h3 class="roboto-medium">Take out trash</h3>
+              <div class="todo-btn-conatiner">
+                <button class="btn icon-btn">
+                  <img src="assets/trash.svg" alt="Icon to delete task" />
+                </button>
+                <button class="btn icon-btn">
+                  <img
+                    src="assets/arrow-up-right.svg"
+                    alt="Icon move task to another category"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <p class="todo-description">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Temporibus tenetur.
+            </p>
+          </div>
         </section>
 
-        <section class="todo-category-container">
+        <section class="todo-category-container" id="todo-category-inProgress">
           <header>
             <h3 class="roboto-medium">In Progress</h3>
             <div class="category-counter-container">
@@ -49,7 +70,7 @@
           </header>
         </section>
 
-        <section class="todo-category-container">
+        <section class="todo-category-container" id="todo-category-completed">
           <header>
             <h3 class="roboto-medium">Completed</h3>
             <div class="category-counter-container">
@@ -58,7 +79,7 @@
           </header>
         </section>
 
-        <section class="todo-category-container">
+        <section class="todo-category-container" id="todo-category-onHold">
           <header>
             <h3 class="roboto-medium">On Hold</h3>
             <div class="category-counter-container">
@@ -75,7 +96,7 @@
         <header>
           <h2 class="roboto-medium">Create new task</h2>
           <button class="btn icon-btn" id="close-modal-btn">
-            <img src="assets/close.svg" alt="Image to linkedin link" />
+            <img src="assets/close.svg" alt="Icon to close window" />
           </button>
         </header>
         <form class="modal-form">
@@ -95,6 +116,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-todo"
+                  value="todo"
                 />
                 To-Do
               </label>
@@ -105,6 +127,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-inProgress"
+                  value="inProgress"
                 />
                 In Progress
               </label>
@@ -115,6 +138,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-completed"
+                  value="completed"
                 />
                 Completed
               </label>
@@ -125,6 +149,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-onHold"
+                  value="onHold"
                 />
                 On Hold
               </label>
