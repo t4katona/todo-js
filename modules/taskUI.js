@@ -74,7 +74,6 @@ const taskColors = [
 const generateTaskColor = () => {
   const selectedColors = {};
   const random = Math.floor(Math.random() * taskColors.length - 1) + 1;
-  console.log(taskColors[random]);
   taskColors.forEach((item, index) => {
     if (index === random) {
       selectedColors.backgroundColor = item.backgroundColor;
@@ -112,7 +111,6 @@ function renderTasks() {
   });
 
   createdTasks.forEach((task) => {
-    console.log("single: ", task.backgroundColor);
     const todoCard = document.createElement("div");
     arrangeTaskToCategory(task.category, todoCard);
     todoCard.classList.add("todo-card");

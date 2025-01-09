@@ -1,7 +1,10 @@
 // ** Save task ** //
-function saveTask(task) {
-  console.log("task: ", task);
+function saveTaskToStorage(task) {
   localStorage.setItem(task.id, JSON.stringify(task));
 }
 
-export { saveTask };
+function deleteTaskFromStorage(taskID) {
+  localStorage.removeItem(taskID);
+}
+
+export { saveTaskToStorage, deleteTaskFromStorage };
