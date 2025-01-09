@@ -46,26 +46,50 @@ createTaskBtn.addEventListener("click", (e) => {
 
 // ** Tasks **
 
-// * Task background colors *
-const taskBackgroundColors = [
-  "#E6E6FA",
-  "#FADADD",
-  "#BFEFFF",
-  "#C1E1C1",
-  "#FFDAB9",
-  "#F08080",
-  "#FFFACD",
-  "#B0E0E6",
-  "#CCCCFF",
-  "#F4C2C2",
+// * Task background/border colors *
+const taskColors = [
+  { backgroundColor: "#F2D7EE", borderColor: "#E0A9C8" }, // Cotton Candy Cloud
+  { backgroundColor: "#F9D5E5", borderColor: "#F1B2C6" }, // Mango Smoothie
+  { backgroundColor: "#D6F5D6", borderColor: "#B8E5B5" }, // Mint Green
+  { backgroundColor: "#F1D3E2", borderColor: "#F1A7C1" }, // Lavender Mist
+  { backgroundColor: "#D3E6F4", borderColor: "#A6C7E1" }, // Baby Blue
+  { backgroundColor: "#FFF4E5", borderColor: "#FFE1B2" }, // Peach Glow
+  { backgroundColor: "#F4F5D9", borderColor: "#E0E1A8" }, // Lemon Cream
+  { backgroundColor: "#D8F1E3", borderColor: "#A6D3B0" }, // Soft Mint
+  { backgroundColor: "#E7E0F7", borderColor: "#D1C1E6" }, // Pastel Purple
+  { backgroundColor: "#F5D1C4", borderColor: "#F0A6A0" }, // Blush Rose
+  { backgroundColor: "#D9F1F1", borderColor: "#A6E4E4" }, // Soft Aqua
+  { backgroundColor: "#E1F1D8", borderColor: "#C2E2A6" }, // Sage Green
+  { backgroundColor: "#F4D1D1", borderColor: "#F1A6A6" }, // Pale Pink
+  { backgroundColor: "#D9F0F5", borderColor: "#A6D6E1" }, // Sky Blue
+  { backgroundColor: "#F1F2D8", borderColor: "#E2E6A6" }, // Buttercream
+  { backgroundColor: "#F1D8D2", borderColor: "#F1B0A6" }, // Soft Coral
+  { backgroundColor: "#E7F2D2", borderColor: "#C0E1A6" }, // Lemonade
+  { backgroundColor: "#D9D1F1", borderColor: "#B6A6D9" }, // Lavender Mist
+  { backgroundColor: "#F3E1F7", borderColor: "#D0A6E6" }, // Pink Orchid
+  { backgroundColor: "#E5F1D8", borderColor: "#A9D6A6" }, // Fresh Mint
 ];
 
 // * Generate task background color
-function generateBackground() {
+const generateTaskColor = () => {
+  const selectedColors = {};
+  const random = Math.floor(Math.random() * taskColors.length - 1) + 1;
+  console.log(taskColors[random]);
+  taskColors.forEach((item, index) => {
+    if (index === random) {
+      selectedColors.backgroundColor = item.backgroundColor;
+      selectedColors.borderColor = item.borderColor;
+    }
+  });
+
+  return selectedColors;
+};
+/*function generateTaskColor() {
+    
   return taskBackgroundColors[
     Math.floor(Math.random() * taskBackgroundColors.length - 1) + 1
   ];
-}
+}*/
 
 // * Delete tasks
 todosContainer.addEventListener("click", (e) => {
@@ -80,42 +104,42 @@ todosContainer.addEventListener("click", (e) => {
 const categoryContainers = document.querySelectorAll(
   ".todos-container-by-category"
 );
-categoryContainers.forEach((container) => {
-  container.innerHTML = "";
-});
 
 // * Rendering tasks *
 function renderTasks() {
   categoryContainers.forEach((container) => {
     container.innerHTML = "";
   });
+
   createdTasks.forEach((task) => {
+    console.log("single: ", task.backgroundColor);
     const todoCard = document.createElement("div");
     arrangeTaskToCategory(task.category, todoCard);
     todoCard.classList.add("todo-card");
-    todoCard.style.backgroundColor = generateBackground();
+    todoCard.style.backgroundColor = task.backgroundColor;
+    todoCard.style.borderColor = task.borderColor;
     todoCard.dataset.id = task.id;
 
     todoCard.innerHTML = `
-      <div class="todo-card-heading">
-          <h3 class="roboto-medium">${task.name}</h3>
-          <div class="todo-btn-conatiner">
-              <button class="btn icon-btn task-delete-btn">
-                  <img src="assets/trash.svg" alt="Icon to delete task" />
-              </button>
-              <button class="btn icon-btn">
-                  <img
-                  src="assets/arrow-up-right.svg"
-                  alt="Icon move task to another category"
-                  />
-              </button>
+          <div class="todo-card-heading">
+              <h3 class="roboto-medium">${task.name}</h3>
+              <div class="todo-btn-conatiner">
+                  <button class="btn icon-btn task-delete-btn">
+                      <img src="assets/trash.svg" alt="Icon to delete task" />
+                  </button>
+                  <button class="btn icon-btn">
+                      <img
+                      src="assets/arrow-up-right.svg"
+                      alt="Icon move task to another category"
+                      />
+                  </button>
+              </div>
           </div>
-      </div>
-      <p class="todo-description">
-      ${task.description}
-      </p>
-      `;
+          <p class="todo-description">
+          ${task.description}
+          </p>
+          `;
   });
 }
 
-export { renderTasks };
+export { renderTasks, generateTaskColor };

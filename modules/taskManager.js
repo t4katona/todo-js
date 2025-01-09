@@ -1,4 +1,5 @@
-import { renderTasks } from "./taskUI.js";
+import { renderTasks, generateTaskColor } from "./taskUI.js";
+import { saveTask } from "./taskStore.js";
 
 // ** Create Tasks **
 let createdTasks = [];
@@ -57,8 +58,12 @@ function createTask(taskInputs) {
     name: taskInputs.nameInput,
     description: taskInputs.descriptionInput,
     category: taskInputs.selectedCategoryInput,
+    backgroundColor: generateTaskColor().backgroundColor,
+    borderColor: generateTaskColor().borderColor,
   };
   createdTasks.push(newTask);
+  console.log(createdTasks);
+  saveTask(newTask);
   renderTasks();
 }
 
@@ -71,6 +76,19 @@ function updateCreatedTasks(updatedTasks) {
 function deleteTask(taskID) {
   createdTasks = createdTasks.filter((task) => task.id !== taskID);
 }
+
+// Check localStorage on reload
+window.onload = () => {
+  if (localStorage.length != 0) {
+    createdTasks = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      let item = JSON.parse(localStorage.getItem(key));
+      createdTasks.push(item);
+      renderTasks();
+    }
+  }
+};
 
 export {
   createTask,
