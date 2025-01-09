@@ -4,9 +4,15 @@ import {
   arrangeTaskToCategory,
   createdTasks,
   deleteTask,
+  taskCategories,
+  initializeTaskMoveModalInputs,
+  handleCategoryChange,
+  findTask,
 } from "./taskManager.js";
 
-// * Todos container
+let currentSelectedTask = null;
+
+// Todos container
 const todosContainer = document.querySelector(".todos-container");
 
 // ** Modals **
@@ -14,6 +20,12 @@ const modalOverlay = document.getElementById("modal-overlay");
 const modalCreateTask = document.getElementById("modal-create-task");
 const modalCategoryChange = document.getElementById("modal-category-change");
 const createTaskBtn = document.getElementById("create-task-btn");
+
+// * Change categories
+const disabledInput = document.getElementById("disabledInput");
+const dropdown = document.getElementById("dropdown");
+const options = dropdown.options;
+const saveCategoryChange = document.getElementById("save-category-change");
 
 // * Open 'create task modal' btn
 const createTaskModalOpenBtn = document.getElementById(
@@ -42,6 +54,13 @@ modalClosingBtns.forEach((btn) => {
 createTaskBtn.addEventListener("click", (e) => {
   e.preventDefault();
   createTask(getModalFormInputs());
+});
+
+saveCategoryChange.addEventListener("click", (e) => {
+  e.preventDefault();
+  const selectedCategory = options[dropdown.selectedIndex].value;
+  handleCategoryChange(selectedCategory, currentSelectedTask);
+  renderTasks();
 });
 
 // ** Tasks **
@@ -83,18 +102,38 @@ const generateTaskColor = () => {
 
   return selectedColors;
 };
-/*function generateTaskColor() {
-    
-  return taskBackgroundColors[
-    Math.floor(Math.random() * taskBackgroundColors.length - 1) + 1
-  ];
-}*/
 
 // * Delete tasks
 todosContainer.addEventListener("click", (e) => {
   if (e.target.closest(".task-delete-btn")) {
     const taskID = e.target.closest(".todo-card").dataset.id;
     deleteTask(taskID);
+    renderTasks();
+  }
+});
+
+// ** Set inputs for 'Move Task' modal **
+function setMoveTaskModalInputs(taskID) {
+  const inputs = initializeTaskMoveModalInputs(taskID);
+
+  // * Set disabled input
+  disabledInput.value = inputs.unavaliableCategory;
+
+  // * Set available inputs
+  for (let i = 0; i < options.length; i++) {
+    options[i].value = inputs.availableCategories[i];
+    options[i].text = inputs.availableCategories[i];
+  }
+}
+// * Move tasks
+todosContainer.addEventListener("click", (e) => {
+  if (e.target.closest(".task-move-btn")) {
+    const taskID = e.target.closest(".todo-card").dataset.id;
+    modalOverlay.classList.add("show-modal");
+    modalCreateTask.style.display = "none";
+    modalCategoryChange.style.display = "block";
+    currentSelectedTask = findTask(taskID);
+    setMoveTaskModalInputs(taskID);
     renderTasks();
   }
 });
@@ -125,7 +164,7 @@ function renderTasks() {
                   <button class="btn icon-btn task-delete-btn">
                       <img src="assets/trash.svg" alt="Icon to delete task" />
                   </button>
-                  <button class="btn icon-btn">
+                  <button class="btn icon-btn task-move-btn">
                       <img
                       src="assets/arrow-up-right.svg"
                       alt="Icon move task to another category"

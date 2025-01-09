@@ -16,7 +16,7 @@ window.onload = () => {
 
 // ** Create Tasks **
 let createdTasks = [];
-let taskCategories = ["To-Do", "In Progress", "Completed", "On Hold"];
+const taskCategories = ["To-Do", "In Progress", "Completed", "On Hold"];
 
 // * Get modal form inputs
 const getModalFormInputs = () => {
@@ -90,6 +90,31 @@ function deleteTask(taskID) {
   deleteTaskFromStorage(taskID);
 }
 
+// ** Find task **
+function findTask(taskID) {
+  return createdTasks.find((task) => {
+    return task.id === taskID;
+  });
+}
+
+// ** Initial setup for 'Movel Task' modal inputs **
+function initializeTaskMoveModalInputs(taskID) {
+  const currentTask = findTask(taskID);
+  const unavaliableCategory = taskCategories.find(
+    (category) => category === currentTask.category
+  );
+  const availableCategories = taskCategories.filter(
+    (categories) => categories != unavaliableCategory
+  );
+
+  return { unavaliableCategory, availableCategories };
+}
+
+// ** Handle task category change **
+function handleCategoryChange(selectedInput, currentTask) {
+  currentTask.category = selectedInput;
+}
+
 export {
   createTask,
   getModalFormInputs,
@@ -97,4 +122,8 @@ export {
   arrangeTaskToCategory,
   createdTasks,
   deleteTask,
+  taskCategories,
+  initializeTaskMoveModalInputs,
+  handleCategoryChange,
+  findTask,
 };
