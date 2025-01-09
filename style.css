@@ -202,7 +202,8 @@ form {
   margin-bottom: 0.5rem;
 }
 
-.form-group input[type="text"] {
+.form-group input[type="text"],
+select {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -234,6 +235,8 @@ form {
   justify-content: flex-end;
   align-items: center;
 }
+
+/* Modal -> change category */
 
 @media only screen and (min-width: 600px) {
   body {

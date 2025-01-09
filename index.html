@@ -28,74 +28,74 @@
     <main>
       <header class="main-section-header">
         <h2 class="roboto-medium">All tasks</h2>
-        <button class="btn primary-btn" id="open-modal-btn">Create task</button>
+        <button class="btn primary-btn" id="create-task-modal-open-btn">
+          Create task
+        </button>
       </header>
       <div class="todos-container">
-        <section class="todo-category-container" id="todo-category-todo">
+        <section class="todo-category-container">
           <header>
             <h3 class="roboto-medium">To-Do</h3>
             <div class="category-counter-container">
               <p class="category-counter roboto-medium">3</p>
             </div>
           </header>
-          <div class="todo-card">
-            <div class="todo-card-heading">
-              <h3 class="roboto-medium">Take out trash</h3>
-              <div class="todo-btn-conatiner">
-                <button class="btn icon-btn">
-                  <img src="assets/trash.svg" alt="Icon to delete task" />
-                </button>
-                <button class="btn icon-btn">
-                  <img
-                    src="assets/arrow-up-right.svg"
-                    alt="Icon move task to another category"
-                  />
-                </button>
-              </div>
-            </div>
-
-            <p class="todo-description">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus tenetur.
-            </p>
-          </div>
+          <div
+            class="todos-container-by-category"
+            id="todo-category-todo"
+          ></div>
         </section>
 
-        <section class="todo-category-container" id="todo-category-inProgress">
+        <section class="todo-category-container">
           <header>
             <h3 class="roboto-medium">In Progress</h3>
             <div class="category-counter-container">
               <p class="category-counter roboto-medium">2</p>
             </div>
           </header>
+
+          <div
+            class="todos-container-by-category"
+            id="todo-category-inProgress"
+          ></div>
         </section>
 
-        <section class="todo-category-container" id="todo-category-completed">
+        <section class="todo-category-container">
           <header>
             <h3 class="roboto-medium">Completed</h3>
             <div class="category-counter-container">
               <p class="category-counter roboto-medium">0</p>
             </div>
           </header>
+
+          <div
+            class="todos-container-by-category"
+            id="todo-category-completed"
+          ></div>
         </section>
 
-        <section class="todo-category-container" id="todo-category-onHold">
+        <section class="todo-category-container">
           <header>
             <h3 class="roboto-medium">On Hold</h3>
             <div class="category-counter-container">
               <p class="category-counter roboto-medium">1</p>
             </div>
           </header>
+
+          <div
+            class="todos-container-by-category"
+            id="todo-category-onHold"
+          ></div>
         </section>
       </div>
     </main>
 
     <!-- Modal for task creation -->
     <div class="modal-overlay" id="modal-overlay">
-      <div class="modal-container" id="modal">
+      <div class="modal-container" id="modal-create-task">
         <header>
           <h2 class="roboto-medium">Create new task</h2>
-          <button class="btn icon-btn" id="close-modal-btn">
+          <button class="btn icon-btn btn-close-modal">
             <img src="assets/close.svg" alt="Icon to close window" />
           </button>
         </header>
@@ -116,7 +116,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-todo"
-                  value="todo"
+                  value="To-Do"
                 />
                 To-Do
               </label>
@@ -127,7 +127,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-inProgress"
-                  value="inProgress"
+                  value="In Progress"
                 />
                 In Progress
               </label>
@@ -138,7 +138,7 @@
                   checked="checked"
                   name="radio"
                   id="radio-completed"
-                  value="completed"
+                  value="Completed"
                 />
                 Completed
               </label>
@@ -149,22 +149,52 @@
                   checked="checked"
                   name="radio"
                   id="radio-onHold"
-                  value="onHold"
+                  value="On Hold"
                 />
                 On Hold
               </label>
             </div>
           </div>
           <div class="modal-btn-container">
-            <button class="btn secondary-btn" id="inner-close-modal-btn">
-              Close
+            <button class="btn secondary-btn btn-close-modal">Close</button>
+            <button type="submit" class="btn primary-btn" id="create-task-btn">
+              Create task
             </button>
-            <button class="btn primary-btn" id="createTask">Create task</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-container" id="modal-category-change">
+        <header>
+          <h2 class="roboto-medium">Change category</h2>
+          <button class="btn icon-btn btn-close-modal">
+            <img src="assets/close.svg" alt="Icon to close window" />
+          </button>
+        </header>
+        <form class="modal-form">
+          <div class="form-group">
+            <label for="disabledInput">From</label>
+            <input type="text" id="disabledInput" disabled />
+          </div>
+          <div class="form-group">
+            <label for="dropdown">To</label>
+            <select id="dropdown">
+              <option value="option1">In progress</option>
+              <option value="option2">Completed</option>
+              <option value="option3">On hold</option>
+            </select>
+          </div>
+          <div class="modal-btn-container">
+            <button class="btn secondary-btn btn-close-modal">Close</button>
+            <button class="btn primary-btn" id="save-category-change">
+              Save
+            </button>
           </div>
         </form>
       </div>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
+    <script type="module" src="./modules/taskUI.js"></script>
+    <script type="module" src="./modules/taskManager.js"></script>
   </body>
 </html>
