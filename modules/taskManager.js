@@ -87,7 +87,6 @@ function updateCreatedTasks(updatedTasks) {
 // ** Delete tasks **
 function deleteTask(taskID) {
   createdTasks = createdTasks.filter((task) => task.id !== taskID);
-  deleteTaskFromStorage(taskID);
 }
 
 // ** Find task **

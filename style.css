@@ -101,16 +101,13 @@ main {
 }
 
 .todo-category-container > header {
-  margin-bottom: 1rem;
-}
-
-.category-counter-container {
-  background-color: aliceblue;
+  border: 1px solid #cccccc7e;
+  padding: .5rem;
   border-radius: 4px;
 }
 
-.category-counter {
-  padding: 0.5rem 0.8rem;
+.todo-category-container > header {
+  margin-bottom: 1rem;
 }
 
 /* Todos -> Todo cards */

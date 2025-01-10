@@ -4,7 +4,6 @@ import {
   arrangeTaskToCategory,
   createdTasks,
   deleteTask,
-  taskCategories,
   initializeTaskMoveModalInputs,
   handleCategoryChange,
   findTask,
