@@ -24,7 +24,8 @@ body {
 nav,
 header,
 .todo-card-heading,
-.todo-btn-conatiner {
+.todo-btn-conatiner,
+.btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,10 +83,10 @@ main {
   border-radius: 4px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 1rem;
   color: white;
   cursor: pointer;
+  column-gap: 0.3rem;
 }
 
 .primary-btn {
