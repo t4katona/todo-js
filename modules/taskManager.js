@@ -1,4 +1,4 @@
-import { taskUI } from "./taskUI.js";
+import { UI } from "./taskUI.js";
 import { store } from "./taskStore.js";
 
 let createdTasks = [];
@@ -17,7 +17,7 @@ window.onload = () => {
       } else {
         createdTasks.push(item);
       }
-      taskUI.renderTasks();
+      UI.renderTasks();
     }
   }
 };
@@ -78,14 +78,14 @@ function createTask(taskInputs) {
     name: taskInputs.nameInput,
     description: taskInputs.descriptionInput,
     category: taskInputs.selectedCategoryInput,
-    backgroundColor: taskUI.generateTaskColor().backgroundColor,
-    borderColor: taskUI.generateTaskColor().borderColor,
+    backgroundColor: UI.generateTaskColor().backgroundColor,
+    borderColor: UI.generateTaskColor().borderColor,
   };
   createdTasks.push(newTask);
   console.log("cT: ", createdTasks);
   store.saveTaskToStorage(newTask);
-  taskUI.renderTasks();
-  taskUI.renderTaskCounters();
+  UI.renderTasks();
+  UI.renderTaskCounters();
 }
 
 // ** Update created tasks **
@@ -106,7 +106,7 @@ function deleteTask(taskID) {
   if (taskElement) taskElement.remove();
 
   // Re-render the task counters after delete
-  taskUI.renderTaskCounters();
+  UI.renderTaskCounters();
 }
 
 // ** Find task **
