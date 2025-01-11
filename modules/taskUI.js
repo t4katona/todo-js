@@ -192,6 +192,6 @@ function renderTasks() {
   });
 }
 
-export const taskUI = { 
+export const UI = { 
   renderTasks, generateTaskColor, renderTaskCounters
  };
