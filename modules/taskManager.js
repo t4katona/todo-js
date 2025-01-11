@@ -1,5 +1,7 @@
-import { renderTasks, generateTaskColor } from "./taskUI.js";
-import { saveTaskToStorage, deleteTaskFromStorage } from "./taskStore.js";
+import { taskUI } from "./taskUI.js";
+import { store} from "./taskStore.js";
+
+let createdTasks = [];
 
 // Check localStorage on reload
 window.onload = () => {
@@ -9,13 +11,12 @@ window.onload = () => {
       let key = localStorage.key(i);
       let item = JSON.parse(localStorage.getItem(key));
       createdTasks.push(item);
-      renderTasks();
+      taskUI.renderTasks();
     }
   }
 };
 
 // ** Create Tasks **
-let createdTasks = [];
 const taskCategories = ["To-Do", "In Progress", "Completed", "On Hold"];
 
 // * Get modal form inputs
@@ -71,12 +72,13 @@ function createTask(taskInputs) {
     name: taskInputs.nameInput,
     description: taskInputs.descriptionInput,
     category: taskInputs.selectedCategoryInput,
-    backgroundColor: generateTaskColor().backgroundColor,
-    borderColor: generateTaskColor().borderColor,
+    backgroundColor: taskUI.generateTaskColor().backgroundColor,
+    borderColor: taskUI.generateTaskColor().borderColor,
   };
   createdTasks.push(newTask);
-  saveTaskToStorage(newTask);
-  renderTasks();
+  console.log("cT: ", createdTasks);
+  store.saveTaskToStorage(newTask);
+  taskUI.renderTasks();
 }
 
 // ** Update created tasks **
@@ -87,6 +89,7 @@ function updateCreatedTasks(updatedTasks) {
 // ** Delete tasks **
 function deleteTask(taskID) {
   createdTasks = createdTasks.filter((task) => task.id !== taskID);
+  store.deleteTaskFromStorage(taskID)
 }
 
 // ** Find task **
@@ -114,13 +117,15 @@ function handleCategoryChange(selectedInput, currentTask) {
   currentTask.category = selectedInput;
 }
 
-export {
+export const taskManager = {
   createTask,
   getModalFormInputs,
-  renderTasks,
   arrangeTaskToCategory,
-  createdTasks,
-  deleteTask,
+  // Getter for other modules to receive the updated array
+  get createdTasks() {
+    return createdTasks;
+  },
+  deleteTask, 
   taskCategories,
   initializeTaskMoveModalInputs,
   handleCategoryChange,

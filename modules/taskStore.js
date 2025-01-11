@@ -7,4 +7,4 @@ function deleteTaskFromStorage(taskID) {
   localStorage.removeItem(taskID);
 }
 
-export { saveTaskToStorage, deleteTaskFromStorage };
+export const store = { saveTaskToStorage, deleteTaskFromStorage };

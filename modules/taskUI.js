@@ -1,12 +1,5 @@
 import {
-  createTask,
-  getModalFormInputs,
-  arrangeTaskToCategory,
-  createdTasks,
-  deleteTask,
-  initializeTaskMoveModalInputs,
-  handleCategoryChange,
-  findTask,
+  taskManager
 } from "./taskManager.js";
 
 let currentSelectedTask = null;
@@ -52,13 +45,13 @@ modalClosingBtns.forEach((btn) => {
 
 createTaskBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  createTask(getModalFormInputs());
+  taskManager.createTask(taskManager.getModalFormInputs());
 });
 
 saveCategoryChange.addEventListener("click", (e) => {
   e.preventDefault();
   const selectedCategory = options[dropdown.selectedIndex].value;
-  handleCategoryChange(selectedCategory, currentSelectedTask);
+  taskManager.handleCategoryChange(selectedCategory, currentSelectedTask);
   renderTasks();
 });
 
@@ -106,14 +99,14 @@ const generateTaskColor = () => {
 todosContainer.addEventListener("click", (e) => {
   if (e.target.closest(".task-delete-btn")) {
     const taskID = e.target.closest(".todo-card").dataset.id;
-    deleteTask(taskID);
+    taskManager.deleteTask(taskID);
     renderTasks();
   }
 });
 
 // ** Set inputs for 'Move Task' modal **
 function setMoveTaskModalInputs(taskID) {
-  const inputs = initializeTaskMoveModalInputs(taskID);
+  const inputs = taskManager.initializeTaskMoveModalInputs(taskID);
 
   // * Set disabled input
   disabledInput.value = inputs.unavaliableCategory;
@@ -131,7 +124,7 @@ todosContainer.addEventListener("click", (e) => {
     modalOverlay.classList.add("show-modal");
     modalCreateTask.style.display = "none";
     modalCategoryChange.style.display = "block";
-    currentSelectedTask = findTask(taskID);
+    currentSelectedTask = taskManager.findTask(taskID);
     setMoveTaskModalInputs(taskID);
     renderTasks();
   }
@@ -144,13 +137,15 @@ const categoryContainers = document.querySelectorAll(
 
 // * Rendering tasks *
 function renderTasks() {
+  console.log("test");
   categoryContainers.forEach((container) => {
     container.innerHTML = "";
   });
+  
 
-  createdTasks.forEach((task) => {
+  taskManager.createdTasks.forEach((task) => {
     const todoCard = document.createElement("div");
-    arrangeTaskToCategory(task.category, todoCard);
+    taskManager.arrangeTaskToCategory(task.category, todoCard);
     todoCard.classList.add("todo-card");
     todoCard.style.backgroundColor = task.backgroundColor;
     todoCard.style.borderColor = task.borderColor;
@@ -178,4 +173,6 @@ function renderTasks() {
   });
 }
 
-export { renderTasks, generateTaskColor };
+export const taskUI = { 
+  renderTasks, generateTaskColor
+ };
