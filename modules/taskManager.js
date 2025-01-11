@@ -1,16 +1,22 @@
 import { taskUI } from "./taskUI.js";
-import { store} from "./taskStore.js";
+import { store } from "./taskStore.js";
 
 let createdTasks = [];
 
 // Check localStorage on reload
 window.onload = () => {
+  console.log("store: ", localStorage);
   if (localStorage.length != 0) {
     createdTasks = [];
     for (let i = 0; i < localStorage.length; i++) {
       let key = localStorage.key(i);
-      let item = JSON.parse(localStorage.getItem(key));
-      createdTasks.push(item);
+      let item = localStorage.getItem(key);
+      if(store.isValidJSON(item)) {
+        const parsedItem = JSON.parse(item);
+        createdTasks.push(parsedItem);
+      } else {
+        createdTasks.push(item);
+      }
       taskUI.renderTasks();
     }
   }
@@ -79,6 +85,7 @@ function createTask(taskInputs) {
   console.log("cT: ", createdTasks);
   store.saveTaskToStorage(newTask);
   taskUI.renderTasks();
+  taskUI.renderTaskCounters();
 }
 
 // ** Update created tasks **
@@ -88,8 +95,18 @@ function updateCreatedTasks(updatedTasks) {
 
 // ** Delete tasks **
 function deleteTask(taskID) {
+  // Remove from 'createdTasks' array
   createdTasks = createdTasks.filter((task) => task.id !== taskID);
-  store.deleteTaskFromStorage(taskID)
+
+  // Remove from localStorage
+  store.deleteTaskFromStorage(taskID);
+
+  // Remove from DOM
+  const taskElement = document.querySelector(`[data-id="${taskID}"]`);
+  if (taskElement) taskElement.remove();
+
+  // Re-render the task counters after delete
+  taskUI.renderTaskCounters();
 }
 
 // ** Find task **

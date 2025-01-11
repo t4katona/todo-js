@@ -4,6 +4,11 @@ import {
 
 let currentSelectedTask = null;
 
+const counterTodo = document.getElementById("task-counter-todo");
+const counterInProgress = document.getElementById("task-counter-inProgress");
+const counterCompleted = document.getElementById("task-counter-completed");
+const counterOnHold = document.getElementById("task-counter-onHold");
+
 // Todos container
 const todosContainer = document.querySelector(".todos-container");
 
@@ -53,6 +58,7 @@ saveCategoryChange.addEventListener("click", (e) => {
   const selectedCategory = options[dropdown.selectedIndex].value;
   taskManager.handleCategoryChange(selectedCategory, currentSelectedTask);
   renderTasks();
+  renderTaskCounters();
 });
 
 // ** Tasks **
@@ -135,13 +141,26 @@ const categoryContainers = document.querySelectorAll(
   ".todos-container-by-category"
 );
 
+// * Render task counters *
+function renderTaskCounters() {
+  const todoContainer = document.getElementById('todo-category-todo');
+  const inProgressContainer = document.getElementById('todo-category-inProgress');
+  const completedContainer = document.getElementById('todo-category-completed');
+  const onHoldContainer = document.getElementById('todo-category-onHold');
+  console.log(" dkla dlkwdlawdl: ", todoContainer.childElementCount);
+
+  counterTodo.innerHTML = todoContainer.childElementCount;
+  counterInProgress.innerHTML = inProgressContainer.childElementCount;
+  counterCompleted.innerHTML = completedContainer.childElementCount;
+  counterOnHold.innerHTML = onHoldContainer.childElementCount;
+}
+
 // * Rendering tasks *
 function renderTasks() {
   console.log("test");
   categoryContainers.forEach((container) => {
     container.innerHTML = "";
   });
-  
 
   taskManager.createdTasks.forEach((task) => {
     const todoCard = document.createElement("div");
@@ -174,5 +193,5 @@ function renderTasks() {
 }
 
 export const taskUI = { 
-  renderTasks, generateTaskColor
+  renderTasks, generateTaskColor, renderTaskCounters
  };
