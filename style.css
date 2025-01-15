@@ -94,6 +94,10 @@ main {
   padding: 0.8rem 1.6rem;
 }
 
+.primary-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 /* Todos */
 
 .todo-category-container {
@@ -101,10 +105,9 @@ main {
 }
 
 .todo-category-container,
-.todo-category-container > header
- {
+.todo-category-container > header {
   border: 1px solid #cccccc7e;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 4px;
 }
 
@@ -113,7 +116,7 @@ main {
 }
 
 .task-category-counter {
-  padding: .3rem .6rem;
+  padding: 0.3rem 0.6rem;
   background-color: #cccccc47;
   border-radius: 4px;
 }
@@ -134,7 +137,8 @@ main {
   align-items: start;
 }
 
-.todo-card-heading > h3, .todo-description {
+.todo-card-heading > h3,
+.todo-description {
   width: 100%;
   word-wrap: break-word;
 }
