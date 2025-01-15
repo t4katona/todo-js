@@ -10,6 +10,7 @@ import "./listeners/tasks/save-category-change.listeners.js";
 window.onload = () => {
   if (taskManager.createdTasks) {
     renderTasks();
+    renderTaskCounters();
   }
 };
 
