@@ -17,8 +17,14 @@ export class TaskManager {
   deleteTask(taskID) {
     this.taskRepository.deleteTask(taskID);
     const taskElement = document.querySelector(`[data-id="${taskID}"]`);
-    if (taskElement) taskElement.remove();
-    UI.renderTaskCounters();
+
+    if (taskElement) {
+      taskElement.classList.add("remove");
+      setTimeout(() => {
+        taskElement.remove();
+        UI.renderTaskCounters();
+      }, 300);
+    }
   }
 
   findTask(taskID) {
