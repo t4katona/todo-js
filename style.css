@@ -197,6 +197,7 @@ main {
 .modal-overlay.show-modal {
   visibility: visible;
   opacity: 1;
+  transition: all 0.15s ease-in-out;
 }
 
 /* Modal -> Form */
