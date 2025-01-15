@@ -140,7 +140,6 @@ main {
 .todo-card-heading {
   max-width: 100%;
   margin-bottom: 1rem;
-  align-items: start;
 }
 
 .todo-card-heading > h3,
