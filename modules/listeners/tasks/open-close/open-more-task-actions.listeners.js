@@ -1,4 +1,4 @@
-import { containers } from "../../constants/ui-dom-elements.constants.js";
+import { containers } from "../../../constants/ui-dom-elements.constants.js";
 
 (() => {
   containers.todosContainer.addEventListener("click", (e) => {
