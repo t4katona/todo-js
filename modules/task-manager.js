@@ -3,7 +3,7 @@ import { taskRepository as mainTaskRepository } from "./task-repository.js";
 import { formTask } from "./utils/create-task.js";
 import { categories } from "./constants/ui-dom-elements.constants.js";
 import { updateTaskElementColors } from "./utils/update-task-element-colors.js";
-import { modals } from "./constants/ui-dom-elements.constants.js";
+import { modals, options } from "./constants/ui-dom-elements.constants.js";
 
 export class TaskManager {
   taskRepository = mainTaskRepository;
@@ -36,10 +36,11 @@ export class TaskManager {
     return this.taskRepository.findAllTasks();
   }
 
-  updateTaskCategory(newCategory) {
+  updateTaskCategory() {
     const task = this.findTask(modals.modalCategoryChange.dataset.id);
+    const selectedCategory = options[dropdown.selectedIndex].value;
     const taskElement = document.querySelector(`[data-id="${task.id}"]`);
-    this.taskRepository.updateCategory(task, newCategory);
+    this.taskRepository.updateCategory(task, selectedCategory);
     updateTaskElementColors(task, taskElement);
     this.arrangeTaskToCategory(task, taskElement);
   }

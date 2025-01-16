@@ -9,10 +9,8 @@ import { modalClosingTransition } from "../../../constants/modal-close-transitio
 (() => {
   buttons.saveCategoryChange.addEventListener("click", (e) => {
     e.preventDefault();
-    const selectedCategory = options[dropdown.selectedIndex].value;
-    taskManager.updateTaskCategory(selectedCategory);
+    taskManager.updateTaskCategory();
     modals.modalOverlay.style.transition = modalClosingTransition;
-
     modals.modalOverlay.classList.remove("show-modal");
   });
 })();
