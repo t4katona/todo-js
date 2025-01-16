@@ -37,6 +37,12 @@ class TaskRepository extends Store {
     this.updateColors(task);
     this.save(this.tasks);
   }
+
+  updateTask(task, updatedTaskDetails) {
+    task.name = updatedTaskDetails.name;
+    task.description = updatedTaskDetails.description;
+    this.save(this.tasks);
+  }
 }
 
 export const taskRepository = new TaskRepository();

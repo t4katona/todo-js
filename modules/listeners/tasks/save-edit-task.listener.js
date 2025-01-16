@@ -1,18 +1,13 @@
-import {
-  modals,
-  buttons,
-  options,
-} from "../../constants/ui-dom-elements.constants.js";
+import { modals, buttons } from "../../constants/ui-dom-elements.constants.js";
 import { taskManager } from "../../task-manager.js";
 import { modalClosingTransition } from "../../constants/modal-close-transition.constant.js";
+import { getEditTaskModalInputs } from "../../modal-helpers/edit-task-modal.helpers.js";
 
 (() => {
-  buttons.saveCategoryChange.addEventListener("click", (e) => {
+  buttons.saveEditedTask.addEventListener("click", (e) => {
     e.preventDefault();
-    const selectedCategory = options[dropdown.selectedIndex].value;
-    taskManager.updateTaskCategory(selectedCategory);
+    taskManager.editTask(getEditTaskModalInputs());
     modals.modalOverlay.style.transition = modalClosingTransition;
-
     modals.modalOverlay.classList.remove("show-modal");
   });
 })();

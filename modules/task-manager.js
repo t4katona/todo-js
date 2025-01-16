@@ -3,6 +3,7 @@ import { taskRepository as mainTaskRepository } from "./task-repository.js";
 import { formTask } from "./utils/create-task.js";
 import { categories } from "./constants/ui-dom-elements.constants.js";
 import { updateTaskElementColors } from "./utils/update-task-element-colors.js";
+import { modals } from "./constants/ui-dom-elements.constants.js";
 
 export class TaskManager {
   taskRepository = mainTaskRepository;
@@ -35,7 +36,8 @@ export class TaskManager {
     return this.taskRepository.findAllTasks();
   }
 
-  updateTaskCategory(task, newCategory) {
+  updateTaskCategory(newCategory) {
+    const task = this.findTask(modals.modalCategoryChange.dataset.id);
     const taskElement = document.querySelector(`[data-id="${task.id}"]`);
     this.taskRepository.updateCategory(task, newCategory);
     updateTaskElementColors(task, taskElement);
@@ -66,6 +68,13 @@ export class TaskManager {
         categories.categoryTodo.appendChild(taskElement);
         break;
     }
+  }
+
+  editTask(updatedTaskDetails) {
+    const task = this.findTask(modals.modalEditTask.dataset.id);
+    this.taskRepository.updateTask(task, updatedTaskDetails);
+    //update task in dom
+    UI.renderTasks();
   }
 }
 

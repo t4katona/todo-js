@@ -121,6 +121,21 @@ main {
   border-radius: 4px;
 }
 
+.task-more-actions-container {
+  position: relative;
+}
+
+.task-more-action-items-container {
+  background-color: white;
+  display: none;
+  width: min-content;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+}
+
 /* Todos -> Todo cards */
 
 .todo-card {
@@ -154,6 +169,10 @@ main {
 
 .todo-description {
   font-size: 0.9rem;
+}
+
+.task-delete-btn p {
+  color: red;
 }
 
 /* Modal */
@@ -332,4 +351,8 @@ select {
   .modal-overlay {
     padding: 1rem 30%;
   }
+}
+
+.p {
+  color: black;
 }

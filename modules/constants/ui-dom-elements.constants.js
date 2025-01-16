@@ -7,6 +7,7 @@ export const modals = {
   modalOverlay: document.getElementById("modal-overlay"),
   modalCreateTask: document.getElementById("modal-create-task"),
   modalCategoryChange: document.getElementById("modal-category-change"),
+  modalEditTask: document.getElementById("modal-edit-task"),
 };
 
 export const buttons = {
@@ -14,6 +15,8 @@ export const buttons = {
   createTaskBtn: document.getElementById("create-task-btn"),
   modalClosingBtns: [...document.getElementsByClassName("btn-close-modal")],
   saveCategoryChange: document.getElementById("save-category-change"),
+  editTaskModalOpenBtn: document.getElementsByClassName("task-edit-btn"),
+  saveEditedTask: document.getElementById("save-edited-task-btn"),
 };
 
 export const counters = {
